@@ -1,0 +1,116 @@
+LAPORAN EDA + MACHINE LEARNING
+DIABETIC DATASET
+================================================================================
+
+1. DATA UNDERSTANDING
+--------------------------------------------------------------------------------
+Jumlah baris  : 101,766
+Jumlah kolom  : 50
+
+Kolom dataset:
+- encounter_id
+- patient_nbr
+- race
+- gender
+- age
+- weight
+- admission_type_id
+- discharge_disposition_id
+- admission_source_id
+- time_in_hospital
+- payer_code
+- medical_specialty
+- num_lab_procedures
+- num_procedures
+- num_medications
+- number_outpatient
+- number_emergency
+- number_inpatient
+- diag_1
+- diag_2
+- diag_3
+- number_diagnoses
+- max_glu_serum
+- A1Cresult
+- metformin
+- repaglinide
+- nateglinide
+- chlorpropamide
+- glimepiride
+- acetohexamide
+- glipizide
+- glyburide
+- tolbutamide
+- pioglitazone
+- rosiglitazone
+- acarbose
+- miglitol
+- troglitazone
+- tolazamide
+- examide
+- citoglipton
+- insulin
+- glyburide-metformin
+- glipizide-metformin
+- glimepiride-pioglitazone
+- metformin-rosiglitazone
+- metformin-pioglitazone
+- change
+- diabetesMed
+- readmitted
+
+
+2. DATA QUALITY
+--------------------------------------------------------------------------------
+Total missing value : 181,168
+Total duplicate     : 0
+Total '?'           : 192,849
+
+Distribusi target:
+            Jumlah  Persentase (%)
+readmitted                        
+NO           54864           53.91
+>30          35545           34.93
+<30          11357           11.16
+
+
+3. PREPROCESSING
+--------------------------------------------------------------------------------
+1. Mengubah '?' menjadi NaN.
+2. Menghapus duplicate.
+3. Menggunakan tiga karakter awal diagnosis sebagai kelompok kategori.
+4. Menghapus encounter_id, patient_nbr, dan weight dari fitur model.
+5. Numerik: median imputation + StandardScaler.
+6. Kategorikal: most-frequent imputation + OneHotEncoder.
+7. Train-test split 80:20 dengan stratifikasi target.
+
+
+4. MODEL
+--------------------------------------------------------------------------------
+1. Logistic Regression
+2. Random Forest
+3. Extra Trees
+
+
+5. PERBANDINGAN MODEL
+--------------------------------------------------------------------------------
+              Model  Accuracy  Precision_Weighted  Recall_Weighted  F1_Weighted  Precision_Macro  Recall_Macro  F1_Macro
+Logistic Regression    0.4814              0.5382           0.4814       0.5013           0.4341        0.4513    0.4256
+      Random Forest    0.5132              0.5431           0.5132       0.5236           0.4433        0.4591    0.4414
+        Extra Trees    0.5064              0.5287           0.5064       0.5159           0.4308        0.4402    0.4320
+
+
+6. HASIL TERTINGGI PER METRIK
+--------------------------------------------------------------------------------
+Accuracy: Random Forest = 0.5132
+Precision_Weighted: Random Forest = 0.5431
+Recall_Weighted: Random Forest = 0.5132
+F1_Weighted: Random Forest = 0.5236
+F1_Macro: Random Forest = 0.4414
+
+
+7. KESIMPULAN
+--------------------------------------------------------------------------------
+F1 Macro tertinggi pada data testing diperoleh oleh Random Forest dengan skor 0.4414.
+F1 Macro digunakan sebagai salah satu acuan karena target readmitted memiliki beberapa kelas.
+Kesimpulan model tetap perlu mempertimbangkan tujuan analisis dan metrik evaluasi yang diprioritaskan.
